@@ -2,27 +2,107 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Untitled Document</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ecotour</title>
+<link href="style.css" rel="stylesheet" type="text/css">
+<link rel="icon" href="images/favicon.png" type="image/png">
 </head>
 
 <body>
-	<header class="site-header">
-<div class="logo">EcoTour</div>
-<nav class="main-nav">
-<a href="#">Про нас</a>
-<a href="#">Маршрути</a>
-<a href="#">Контакти</a>
-</nav>
+<header class="site-header">
+    <div class="logo">EcoTour</div>
+       <nav class="main-nav">
+        <a href="index.html" class="active">Головна</a>
+        <a href="tours.html">Наші тури</a>
+        <a href="about.html">Про нас</a>
+       </nav>
+
 </header>
+
 <main>
-<section class="hero-section">
-<h1>Відкрий для себе дику природу</h1>
-<p>Найкращі еко-маршрути Карпатами. Відпочинь від міської метушні.</p>
-<a href="#" class="btn-primary">Забронювати тур</a>
+    <section class="hero-section">
+        <h1>Відкрий для себе дику природу</h1>
+        <p>Найкращі еко-маршрути Карпатами. Відпочинь від міської метушні.</p>
+   
+
+		
+       <div class="audio-player">
+        <p>Послухай звуки Карпат:</p>
+        <audio controls loop>
+            <source src="media/forest.mp3" type="audio/mpeg">
+            Ваш браузер не підтримує аудіоелемент.
+        </audio>
+       </div>
+
+    </section>
+	
+
+<section id="booking" class="booking-section">
+    <h2>Залиште заявку на тур</h2>
+    
+    <form action="#" method="POST" class="booking-form">
+        <input type="text" name="user_name" placeholder="Ваше ім'я" required>
+        
+        <input type="email" name="user_email" placeholder="Ваш Email" required>
+        
+        <input type="tel" name="user_phone" placeholder="Номер телефону">
+        
+        <select name="tour_choice" required>
+            <option value="" disabled selected>Оберіть маршрут...</option>
+            <option value="goverla">Сходження на Говерлу</option>
+            <option value="synevyr">Озеро Синевир</option>
+            <option value="wild">Дикі походи з наметами</option>
+        </select>
+        
+        <textarea name="user_message" rows="4" placeholder="Додаткові побажання чи запитання..."></textarea>
+        
+        <button type="submit" class="btn-primary">Забронювати</button>
+    </form>
 </section>
+
+	
+
 </main>
+
+
+<div class="quote-widget" style="text-align: center; padding: 30px; background-color: #f1f8e9; margin-top: 40px; border-top: 2px solid #c5e1a5;">
+    <h3 style="color: #2e7d32; margin-bottom: 15px;">🎒 Натхнення для мандрівників</h3>
+    
+    <p id="quote-text" style="font-size: 1.2em; font-style: italic; color: #555;">
+        "Завантажуємо мудрість..."
+    </p>
+    
+    <p id="quote-author" style="font-weight: bold; color: #333; margin-top: 10px;"></p>
+</div>		
+	
+	
 <footer class="site-footer">
-<p>&copy; 2026 EcoTour. Всі права захищено.</p>
+  <p>&copy; 2026 EcoTour. Всі права захищено.</p>
 </footer>
+
+	
+<script>
+    // 1. Звертаємося до нашого власного файлу JSON
+    fetch('quotes.json')
+        .then(response => response.json())
+        .then(data => {
+            // data - це тепер наш список усіх цитат.
+            // 2. Обираємо випадковий номер (індекс) зі списку
+            const randomIndex = Math.floor(Math.random() * data.length);
+            
+            // 3. Беремо цитату під цим випадковим номером
+            const randomQuote = data[randomIndex];
+            
+            // 4. Виводимо на екран
+            document.getElementById('quote-text').innerText = `"${randomQuote.quote}"`;
+            document.getElementById('quote-author').innerText = `- ${randomQuote.author}`;
+        })
+        .catch(error => {
+            console.error("Помилка завантаження цитат:", error);
+            document.getElementById('quote-text').innerText = "Гори чекають на тебе!";
+        });
+</script>
+	
+
 </body>
 </html>

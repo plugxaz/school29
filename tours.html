@@ -1,0 +1,96 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Наші тури - Еко-Тур</title>
+<link href="style.css" rel="stylesheet" type="text/css">
+<link rel="icon" href="images/favicon.png" type="image/png">
+</head>
+
+<body>
+<header class="site-header">
+    <div class="logo">EcoTour</div>
+       <nav class="main-nav">
+        <a href="index.html">Головна</a>
+        <a href="tours.html" class="active">Наші тури</a>
+        <a href="about.html">Про нас</a>
+       </nav>
+
+</header>
+
+<main>
+    <section class="hero-section">
+        <h1>Відкрий для себе дику природу</h1>
+        <p>Найкращі еко-маршрути Карпатами. Відпочинь від міської метушні.</p>
+    </section>
+
+<section class="video-promo">
+
+</section>
+	
+
+<section class="popular-tours">
+    <h2>Популярні маршрути</h2>
+    <div class="tours-grid">
+        <div class="tour-card">
+            <img src="images/tour1.jpg" alt="Вигляд на гори Карпати влітку">
+            <h3>Говерла</h3>
+        </div>
+        <div class="tour-card">
+            <img src="images/tour2.jpg" alt="Гірське озеро Синевир">
+            <h3>Озеро Синевир</h3>
+        </div>
+        <div class="tour-card">
+            <img src="images/tour3.jpg" alt="Туристи в наметовому містечку">
+            <h3>Дикі походи</h3>
+        </div>
+    </div>
+</section>
+
+	
+
+<section class="video-promo">
+<h2>Подивіться, як проходять наші тури</h2>
+<iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/cW1c9fH-QDc?si=0q4t6NlLCKf8axSc" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
+</iframe>
+</section>
+
+
+<div class="weather-widget" style="background: #e0f7fa; padding: 15px; border-radius: 8px; text-align: center; margin: 20px 0;">
+    <h3>⛅ Погода в Карпатах (Говерла)</h3>
+    <p id="weather-result">Завантаження даних із супутника...</p>
+</div>
+
+
+</main>
+
+<footer class="site-footer">
+  <p>&copy; 2026 EcoTour. Всі права захищено.</p>
+</footer>
+
+
+	
+<script>
+    // 1. Адреса API (наш запит до метеостанції з координатами Говерли)
+    const apiUrl = 'https://api.open-meteo.com/v1/forecast?latitude=48.16&longitude=24.50&current_weather=true';
+
+    // 2. Відправляємо "офіціанта" за даними
+    fetch(apiUrl)
+        .then(response => response.json()) // Просимо перекласти відповідь у формат JSON
+        .then(data => {
+            // 3. Дістаємо температуру з отриманих даних
+            const temperature = data.current_weather.temperature;
+            
+            // 4. Знаходимо наш абзац на сторінці і записуємо туди результат
+            document.getElementById('weather-result').innerHTML = `Зараз на вершині: <strong>${temperature} °C</strong>`;
+        })
+        .catch(error => {
+            // Якщо щось пішло не так (немає інтернету)
+            document.getElementById('weather-result').innerHTML = "Не вдалося отримати дані.";
+        });
+</script>
+
+
+</body>
+</html>
